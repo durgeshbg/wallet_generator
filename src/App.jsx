@@ -48,7 +48,7 @@ export default function App() {
 
   return (
     <div className='bg-[url("/wavey-fingerprint.svg")] min-h-screen'>
-      <h1 className='text-center bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 text-transparent bg-clip-text text-7xl font-semibold py-5'>
+      <h1 className='text-center bg-gradient-to-r from-yellow-500 via-red-500 to-pink-500 text-transparent bg-clip-text text-5xl md:text-7xl font-semibold py-5'>
         Wallet Generator
       </h1>
       <div className='flex flex-col bg-gradient-to-r'>

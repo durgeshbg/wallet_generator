@@ -95,7 +95,7 @@ export default function ChainNav({ setChain, chains, chain, createAddress, mnemo
 
         {mnemonic && (
           <button
-            className='rounded-full bg-slate-700 mx-10 py-2 px-6'
+            className='rounded-full bg-slate-700 mx-10 py-2 px-6 absolute -top-14 md:static top-0'
             onClick={createAddress}
           >
             <div className='flex items-center gap-2'>
