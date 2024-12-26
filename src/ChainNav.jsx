@@ -5,6 +5,12 @@ export default function ChainNav({ setChain, chains }) {
       <div className='mx-auto'>
         <button
           className='rounded bg-red-400 mx-10 p-4 py-2'
+          onClick={() => setChain(chains['bitcoin'])}
+        >
+          Bitcoin
+        </button>
+        <button
+          className='rounded bg-red-400 mx-10 p-4 py-2'
           onClick={() => setChain(chains['solana'])}
         >
           Solona
@@ -14,12 +20,6 @@ export default function ChainNav({ setChain, chains }) {
           onClick={() => setChain(chains['ethereum'])}
         >
           Ethereum
-        </button>
-        <button
-          className='rounded bg-red-400 mx-10 p-4 py-2'
-          onClick={() => setChain(chains['bitcoin'])}
-        >
-          Bitcoin
         </button>
       </div>
     </div>

@@ -1,16 +1,10 @@
 import { useState } from 'react';
 import ChainNav from './ChainNav';
+import CurrentChainAddresses from './CurrentChainAddresses';
 
 import { mnemonicToSeedSync, generateMnemonic } from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
-import { derivePath } from 'ed25519-hd-key';
-
-import { BIP32Factory } from 'bip32';
-import * as ecc from 'tiny-secp256k1';
-
-import { HDNodeWallet } from 'ethers';
-
-import { Keypair } from '@solana/web3.js';
+import { createWallet, getDerivedPath } from './utils';
 
 export default function App() {
   const [mnemonic, setMnemonic] = useState();
@@ -26,46 +20,29 @@ export default function App() {
     [chains['ethereum']]: 0,
     [chains['solana']]: 0,
   });
-  const [addressIndex, setAddressIndex] = useState({
-    [chains['bitcoin']]: 0,
-    [chains['ethereum']]: 0,
-    [chains['solana']]: 0,
-  });
+  const [accounts, setAccounts] = useState([]);
+  const currentChainAddresses = accounts.filter((acc) => acc.walletChain === chain);
 
   function genMemonic() {
     try {
       const mnemonic = generateMnemonic(wordlist);
       setMnemonic(mnemonic);
       setSeed(mnemonicToSeedSync(mnemonic));
-      console.log(seed);
     } catch (error) {
       console.error('Error:', error);
     }
   }
 
   function createAddress() {
-    let derivationPath = `m/44'/${chain}'/${accountIndex[chain]}'/0`;
-    if (chain === chains['solana']) {
-      derivationPath += "'";
-    } else {
-      derivationPath += `/${addressIndex[chain]}`;
-    }
-    if (chain === chains['solana']) {
-      // create ethereum wallet
-      const deriveSeed = derivePath(derivationPath, seed);
-      const keyPair = Keypair.fromSeed(deriveSeed.key);
-      console.log(keyPair);
-    } else if (chain === chains['bitcoin']) {
-      // create bitcoin wallet
-      const bip32 = BIP32Factory(ecc);
-      const node = bip32.fromSeed(Buffer.from(seed));
-      const child = node.derivePath(derivationPath);
-      console.log(child.publicKey.toString('hex'), child.toWIF());
-    } else if (chain === chains['ethereum']) {
-      // create ethereum wallet
-      const wallet = HDNodeWallet.fromPhrase(mnemonic, derivationPath);
-      console.log(wallet);
-    }
+    const derivationPath = getDerivedPath(chains, chain, accountIndex[chain]);
+    const wallet = createWallet(mnemonic, derivationPath, seed, chain, chains);
+    setAccounts([...accounts, wallet]);
+    setAccountIndex((current) => {
+      return {
+        ...current,
+        [chain]: current[chain] + 1,
+      };
+    });
   }
 
   return (
@@ -89,6 +66,14 @@ export default function App() {
           </button>
         </div>
       )}
+
+      <div className='text-center'>
+        {currentChainAddresses.length !== 0 ? (
+          <CurrentChainAddresses currentChainAddresses={currentChainAddresses} />
+        ) : (
+          <div>No wallets to show</div>
+        )}
+      </div>
     </>
   );
 }
