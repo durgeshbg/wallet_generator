@@ -16,13 +16,11 @@ export default function Mnemonic() {
   return (
     <>
       <div className='flex justify-center gap-5'>
-        <Link to={'/mnemonic'}>
-          <button className='btn glass md:btn-wide' onClick={genMemonic}>
-            Generate new mnemonic
-          </button>
+        <Link to={'/mnemonic'} className='btn glass md:btn-wide'>
+          Generate new mnemonic
         </Link>
-        <Link to={'/mnemonic/add'}>
-          <button className='btn glass md:btn-wide'>Add existing mnemonic</button>
+        <Link to={'/mnemonic/add'} className='btn glass md:btn-wide'>
+          Add existing mnemonic
         </Link>
       </div>
       <Outlet context={[mnemonic, genMemonic, addMnemonic]} />
