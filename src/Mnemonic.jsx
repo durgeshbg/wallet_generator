@@ -1,39 +1,31 @@
-import { useOutletContext } from "react-router";
+import { Link, Outlet, useOutletContext } from 'react-router';
+import DisplayMnemonic from './DisplayMnemonic';
 
 export default function Mnemonic() {
-  const [currentChainAccounts, mnemonic, chain, chains, genMemonic] = useOutletContext();
-  let words = Array(12).join('.').split('.');
-  if (mnemonic) {
-    words = mnemonic.split(' ');
-  }
+  const [
+    currentChainAccounts,
+    mnemonic,
+    chain,
+    chains,
+    genMemonic,
+    createAddress,
+    setChain,
+    addMnemonic,
+  ] = useOutletContext();
 
   return (
     <>
-      <button className='btn glass' onClick={genMemonic}>
-            Generate Mnemonic
-      </button>
-      <div className='flex flex-col md:flex-row justify-around md:text-3xl text-xl text-center m-2 p-4 rounded text-white'>
-        <div className='flex md:flex-col'>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[0] === "" ? "" : "1. " + words[0]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[4] === "" ? "" : "5. " +words[4]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[8] === "" ? "" : "9. " +words[8]}</div>
-        </div>
-        <div className='flex md:flex-col'>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[1] === "" ? "" : "2. " + words[1]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[5] === "" ? "" : "6. " + words[5]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[9] === "" ? "" : "10. " + words[9]}</div>
-        </div>
-        <div className='flex md:flex-col'>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[2] === "" ? "" : "3. " + words[2]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[6] === "" ? "" : "7. " + words[6]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[10] === "" ? "" : "11. " + words[10]}</div>
-        </div>
-        <div className='flex md:flex-col'>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[3] === "" ? "" : "4. " + words[3]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[7] === "" ? "" : "8. " + words[7]}</div>
-          <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 bg-gradient-to-r from-blue-600  to-blue-400'>{words[11] === "" ? "" : "12. " + words[11]}</div>
-        </div>
+      <div className='flex justify-center gap-5'>
+        <Link to={'/mnemonic'}>
+          <button className='btn glass md:btn-wide' onClick={genMemonic}>
+            Generate new mnemonic
+          </button>
+        </Link>
+        <Link to={'/mnemonic/add'}>
+          <button className='btn glass md:btn-wide'>Add existing mnemonic</button>
+        </Link>
       </div>
+      <Outlet context={[mnemonic, genMemonic, addMnemonic]} />
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { mnemonicToSeedSync, generateMnemonic } from '@scure/bip39';
+import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { createWallet, getDerivedPath } from './utils';
 import Header from './Header';
@@ -28,9 +28,30 @@ export default function App() {
       const mnemonic = generateMnemonic(wordlist);
       setMnemonic(mnemonic);
       setSeed(mnemonicToSeedSync(mnemonic));
+      setAccounts([]);
+      setAccountIndex({
+        [chains['bitcoin']]: 0,
+        [chains['ethereum']]: 0,
+        [chains['solana']]: 0,
+      });
     } catch (error) {
       console.error('Error:', error);
     }
+  }
+
+  function addMnemonic(userMnemonic) {
+    const result = validateMnemonic(userMnemonic, wordlist);
+    if (result) {
+      setMnemonic(userMnemonic);
+      setSeed(mnemonicToSeedSync(mnemonic));
+      setAccounts([]);
+      setAccountIndex({
+        [chains['bitcoin']]: 0,
+        [chains['ethereum']]: 0,
+        [chains['solana']]: 0,
+      });
+    }
+    return result;
   }
 
   function createAddress() {
@@ -54,7 +75,18 @@ export default function App() {
       <Header chains={chains} setChain={setChain} createAddress={createAddress} />
 
       <div className='flex flex-col bg-gradient-to-r'>
-        <Outlet context={[currentChainAccounts, mnemonic, chain, chains, genMemonic]} />
+        <Outlet
+          context={[
+            currentChainAccounts,
+            mnemonic,
+            chain,
+            chains,
+            genMemonic,
+            createAddress,
+            setChain,
+            addMnemonic,
+          ]}
+        />
       </div>
     </>
   );
