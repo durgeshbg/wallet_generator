@@ -17,6 +17,7 @@ export default function CurrentChainAccounts() {
   ] = useOutletContext();
 
   if (!mnemonic) {
+    alert("Please add set your mnemonic first!")
     return <Navigate to={'/mnemonic'} />;
   }
 

@@ -1,12 +1,25 @@
 import { useOutletContext } from 'react-router';
 import DisplayMnemonic from './DisplayMnemonic';
 import { useState } from 'react';
+import MnemonicForm from './MnemonicForm';
 
 function AddMnemonic() {
   const [mnemonic, genMemonic, addMnemonic] = useOutletContext();
-  const [userMnemonic, setuserMnemonic] = useState();
+  const [userMnemonic, setUserMnemonic] = useState();
   const [displayForm, setDisplayForm] = useState(true);
   const [error, setError] = useState();
+
+  function validateUserMnemonic() {
+    const res = addMnemonic(userMnemonic);
+    if (res) {
+      setDisplayForm(false);
+      setError(false);
+    } else {
+      setDisplayForm(true);
+      setError(true);
+    }
+  }
+
   return (
     <>
       <div className='my-4 mx-auto'>
@@ -20,27 +33,14 @@ function AddMnemonic() {
         </button>
         <button
           className='btn btn-outline btn-info btn-md mx-5 w-max uppercase'
-          onClick={() => {            
-            const res = addMnemonic(userMnemonic);
-            if (res) {
-              setDisplayForm(false);
-              setError(false);
-            } else {
-              setDisplayForm(true);
-              setError(true);
-            }
-          }}
+          onClick={validateUserMnemonic}
         >
           Validate
         </button>
       </div>
 
       {displayForm ? (
-        <input
-          className='bg-base-300 w-1/2 mx-auto h-10 px-2'
-          value={userMnemonic}
-          onChange={(e) => setuserMnemonic(e.target.value)}
-        />
+        <MnemonicForm setUserMnemonic={setUserMnemonic} />
       ) : (
         <DisplayMnemonic mnemonic={mnemonic} />
       )}
