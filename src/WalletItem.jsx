@@ -15,7 +15,7 @@ export default function WalletItem({ wallet, chain, chains }) {
         {chain === chains['solana'] && <SolanaSVG height={45} width={45} />}
         {chain === chains['ethereum'] && <EthereumSVG height={45} width={45} />}
       </div>
-      <div className='flex flex-col justify-evenly h-fit mx-3 my-2 w-full'>
+      <div className='flex flex-col justify-evenly h-fit mx-auto my-2 w-9/12'>
         <div className='flex gap-2 items-center bg-base-200 p-2 my-2 w-11/12'>
           <div className='border-r-2 pr-2'>
             <AddressSVG />

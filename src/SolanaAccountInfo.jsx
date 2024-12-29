@@ -14,7 +14,7 @@ function SolanaAccountInfo({ account }) {
       const conn = new Connection(rpc, 'confirmed');
       const publicKey = new PublicKey(account.address);
       try {
-        const dataBalance = await conn.getBalance(publicKey);
+        const dataBalance = await conn.getBalance(publicKey, 10);
         setBalance(dataBalance / LAMPORTS_PER_SOL);
         const dataLatestBlockhash = await conn.getLatestBlockhash();
         setLatestBlockhash(dataLatestBlockhash);
@@ -29,8 +29,8 @@ function SolanaAccountInfo({ account }) {
   }, [account]);
 
   return (
-    <div>
-      <h2 className='text-md font-bold my-10 text-3xl border-2 shadow-lg border-accent w-max mx-auto py-2 px-4 rounded-md'>
+    <div className='w-full'>
+      <h2 className='text-md font-bold my-10 text-xl border-2 shadow-lg border-accent w-max mx-auto py-2 px-4 rounded-md'>
         {account.address}
       </h2>
       <div className=' px-3 mx-auto w-6/12 mt-24'>

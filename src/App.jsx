@@ -14,7 +14,7 @@ export default function App() {
     ethereum: 60,
     solana: 501,
   };
-  const [chain, setChain] = useState(chains['bitcoin']);
+  const [chain, setChain] = useState(chains['solana']);
   const [accountIndex, setAccountIndex] = useState({
     [chains['bitcoin']]: 0,
     [chains['ethereum']]: 0,
