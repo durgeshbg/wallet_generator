@@ -1,4 +1,4 @@
-import ClipBoardSVG from "./assets/svgs/ClipBoardSVG";
+import ClipBoardSVG from './assets/svgs/ClipBoardSVG';
 
 function DisplayMnemonic({ mnemonic }) {
   let words = Array(12).join('.').split('.');
@@ -8,6 +8,9 @@ function DisplayMnemonic({ mnemonic }) {
 
   return (
     <>
+      <h2 className='btn btn-ghost bg-gradient-to-r from-yellow-500 to-red-500 text-transparent bg-clip-text text-3xl md:text-4xl font-semibold'>
+        Current mnemonic
+      </h2>
       <div className='flex flex-col md:flex-row justify-around md:text-3xl text-xl text-center m-2 p-4 rounded text-white'>
         <div className='flex md:flex-col'>
           <div className='flex justify-center items-center rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 glass btn md:text-xl uppercase'>

@@ -16,10 +16,10 @@ export default function Mnemonic() {
   return (
     <>
       <div className='flex justify-center gap-5'>
-        <Link to={'/mnemonic'} className='btn glass md:btn-wide'>
+        <Link to={''} className='btn glass md:btn-wide'>
           Generate new mnemonic
         </Link>
-        <Link to={'/mnemonic/add'} className='btn glass md:btn-wide'>
+        <Link to={'/add'} className='btn glass md:btn-wide'>
           Add existing mnemonic
         </Link>
       </div>

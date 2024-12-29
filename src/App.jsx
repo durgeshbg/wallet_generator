@@ -4,7 +4,7 @@ import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/b
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { createWallet, getDerivedPath } from './utils';
 import Header from './Header';
-import { Outlet, redirect } from 'react-router';
+import { Navigate, Outlet, redirect } from 'react-router';
 
 export default function App() {
   const [mnemonic, setMnemonic] = useState();

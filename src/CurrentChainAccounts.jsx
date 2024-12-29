@@ -1,9 +1,10 @@
 import { Link, Navigate, useOutletContext } from 'react-router';
-import Wallet from './Wallet';
+import Wallet from './WalletItem';
 import AddSVG from './assets/svgs/AddSVG';
 import BitCoinSVG from './assets/svgs/BitCoinSVG';
 import SolanaSVG from './assets/svgs/SolanaSVG';
 import EthereumSVG from './assets/svgs/EthereumSVG';
+import ArrowSVG from './assets/svgs/ArrowSVG';
 
 export default function CurrentChainAccounts() {
   const [
@@ -17,18 +18,25 @@ export default function CurrentChainAccounts() {
   ] = useOutletContext();
 
   if (!mnemonic) {
-    alert("Please add set your mnemonic first!")
-    return <Navigate to={'/mnemonic'} />;
+    alert('Please add set your mnemonic first!');
+    return <Navigate to={'/'} />;
   }
 
   return (
     <>
       <h2 className='text-center text-5xl'>
+        <div className='text-xl uppercase'>Current chain</div>
         <div className='dropdown'>
-          <div tabIndex={0} role='button' className='btn m-1'>
+          <div tabIndex={0} role='button' className='btn m-1 flex'>
             {chain === chains['bitcoin'] && <BitCoinSVG />}
             {chain === chains['solana'] && <SolanaSVG />}
             {chain === chains['ethereum'] && <EthereumSVG />}
+            {chain === chains['ethereum'] && 'Ethereum'}
+            {chain === chains['bitcoin'] && 'BitCoin'}
+            {chain === chains['solana'] && 'Solana'}
+            <span className='ml-5'>
+              <ArrowSVG />
+            </span>
           </div>
           <ul
             tabIndex={0}
@@ -54,7 +62,6 @@ export default function CurrentChainAccounts() {
             </li>
           </ul>
         </div>
-        <div className='text-xl uppercase'>Current chain</div>
       </h2>
       <div>
         <button className='flex btn btn-outline mx-3 ml-auto' onClick={createAddress}>

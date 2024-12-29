@@ -7,18 +7,19 @@ import Mnemonic from './Mnemonic.jsx';
 import CurrentChainAccounts from './CurrentChainAccounts.jsx';
 import AddMnemonic from './AddMnemonic.jsx';
 import GenerateMnemonic from './GenerateMnemonic.jsx';
+import Wallet from './Wallet.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />}>
-          <Route index element={<Mnemonic />} />
-          <Route path='mnemonic' element={<Mnemonic />}>
+        <Route element={<App />}>
+          <Route path='/' element={<Mnemonic />}>
             <Route index element={<GenerateMnemonic />} />
             <Route path='add' element={<AddMnemonic />} />
           </Route>
           <Route path='accounts' element={<CurrentChainAccounts />} />
+          <Route path='accounts/:id' element={<Wallet />} />
         </Route>
       </Routes>
     </BrowserRouter>

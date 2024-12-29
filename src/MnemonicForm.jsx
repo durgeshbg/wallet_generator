@@ -19,6 +19,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 0);
           }}
+          placeholder='1.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -26,6 +27,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 1);
           }}
+          placeholder='2.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -33,6 +35,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 2);
           }}
+          placeholder='3.   ____'
         />
       </div>
       <div className='flex md:flex-col'>
@@ -42,6 +45,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 3);
           }}
+          placeholder='4.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -49,6 +53,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 4);
           }}
+          placeholder='5.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -56,6 +61,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 5);
           }}
+          placeholder='6.   ____'
         />
       </div>
       <div className='flex md:flex-col'>
@@ -65,6 +71,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 6);
           }}
+          placeholder='7.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -72,6 +79,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 7);
           }}
+          placeholder='8.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -79,6 +87,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 8);
           }}
+          placeholder='9.   ____'
         />
       </div>
       <div className='flex md:flex-col'>
@@ -88,6 +97,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 9);
           }}
+          placeholder='10.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -95,6 +105,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 10);
           }}
+          placeholder='11.   ____'
         />
         <input
           className='px-10 rounded mx-auto my-4  md:w-44 w-28 md:h-20 h-14 outline-dashed bg-base-200 focus-within:outline focus-within:outline-blue-500 md:text-xl text-xs uppercase'
@@ -102,6 +113,7 @@ function MnemonicForm({ setUserMnemonic }) {
           onChange={(e) => {
             handleChange(e.target.value.trim(), 11);
           }}
+          placeholder='12.   ____'
         />
       </div>
     </div>
