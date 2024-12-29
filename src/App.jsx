@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { createWallet, getDerivedPath } from './utils';
-import Header from './Header';
+import Header from './components/Header/Header';
 import { Navigate, Outlet, redirect } from 'react-router';
 
 export default function App() {

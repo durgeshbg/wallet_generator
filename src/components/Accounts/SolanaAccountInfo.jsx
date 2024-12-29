@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import SolanaSVG from './assets/svgs/SolanaSVG';
+import SolanaSVG from '../../assets/svgs/SolanaSVG';
 import { Connection, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 
 function SolanaAccountInfo({ account }) {

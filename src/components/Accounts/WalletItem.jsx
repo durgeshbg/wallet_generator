@@ -1,10 +1,10 @@
-import BitCoinSVG from './assets/svgs/BitCoinSVG';
-import ClipBoardSVG from './assets/svgs/ClipBoardSVG';
-import EthereumSVG from './assets/svgs/EthereumSVG';
-import SolanaSVG from './assets/svgs/SolanaSVG';
-import AddressSVG from './assets/svgs/AddressSVG';
-import InfoSVG from './assets/svgs/InfoSVG';
-import KeySVG from './assets/svgs/KeySVG';
+import BitCoinSVG from '../../assets/svgs/BitCoinSVG';
+import ClipBoardSVG from '../../assets/svgs/ClipBoardSVG';
+import EthereumSVG from '../../assets/svgs/EthereumSVG';
+import SolanaSVG from '../../assets/svgs/SolanaSVG';
+import AddressSVG from '../../assets/svgs/AddressSVG';
+import InfoSVG from '../../assets/svgs/InfoSVG';
+import KeySVG from '../../assets/svgs/KeySVG';
 import { Link } from 'react-router';
 
 export default function WalletItem({ wallet, chain, chains }) {

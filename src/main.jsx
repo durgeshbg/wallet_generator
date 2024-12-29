@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.jsx';
 import { BrowserRouter, Route, Routes } from 'react-router';
-import Mnemonic from './Mnemonic.jsx';
-import CurrentChainAccounts from './CurrentChainAccounts.jsx';
-import AddMnemonic from './AddMnemonic.jsx';
-import GenerateMnemonic from './GenerateMnemonic.jsx';
-import Wallet from './Wallet.jsx';
+import Mnemonic from './components/Mnemonic/Mnemonic.jsx';
+import CurrentChainAccounts from './components/Accounts/CurrentChainAccounts.jsx';
+import AddMnemonic from './components/Mnemonic/AddMnemonic.jsx';
+import GenerateMnemonic from './components/Mnemonic/GenerateMnemonic.jsx';
+import Wallet from './components/Accounts/Wallet.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

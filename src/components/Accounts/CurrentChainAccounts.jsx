@@ -1,10 +1,10 @@
 import { Link, Navigate, useOutletContext } from 'react-router';
 import Wallet from './WalletItem';
-import AddSVG from './assets/svgs/AddSVG';
-import BitCoinSVG from './assets/svgs/BitCoinSVG';
-import SolanaSVG from './assets/svgs/SolanaSVG';
-import EthereumSVG from './assets/svgs/EthereumSVG';
-import ArrowSVG from './assets/svgs/ArrowSVG';
+import AddSVG from '../../assets/svgs/AddSVG';
+import BitCoinSVG from '../../assets/svgs/BitCoinSVG';
+import SolanaSVG from '../../assets/svgs/SolanaSVG';
+import EthereumSVG from '../../assets/svgs/EthereumSVG';
+import ArrowSVG from '../../assets/svgs/ArrowSVG';
 
 export default function CurrentChainAccounts() {
   const [

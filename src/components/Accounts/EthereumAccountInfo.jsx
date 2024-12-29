@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import EthereumSVG from './assets/svgs/EthereumSVG';
+import EthereumSVG from '../../assets/svgs/EthereumSVG';
 import { Network, Alchemy } from 'alchemy-sdk';
 import { WeiPerEther } from 'ethers';
 

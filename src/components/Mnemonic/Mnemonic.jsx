@@ -1,5 +1,5 @@
 import { Link, Outlet, useOutletContext } from 'react-router';
-import DisplayMnemonic from './DisplayMnemonic';
+import DisplayMnemonic from '../Mnemonic/DisplayMnemonic';
 
 export default function Mnemonic() {
   const [

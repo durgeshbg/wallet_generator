@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import BitCoinSVG from './assets/svgs/BitCoinSVG';
 import axios from 'axios';
 
 function BitcoinAccountInfo({ account }) {

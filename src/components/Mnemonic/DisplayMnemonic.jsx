@@ -1,4 +1,4 @@
-import ClipBoardSVG from './assets/svgs/ClipBoardSVG';
+import ClipBoardSVG from '../../assets/svgs/ClipBoardSVG';
 
 function DisplayMnemonic({ mnemonic }) {
   let words = Array(12).join('.').split('.');
