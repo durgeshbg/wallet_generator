@@ -1,14 +1,46 @@
-import { Link, Navigate, useOutletContext } from 'react-router';
+import { Link, Navigate } from 'react-router';
 import Wallet from './WalletItem';
 import AddSVG from '../../assets/svgs/AddSVG';
 import BitCoinSVG from '../../assets/svgs/BitCoinSVG';
 import SolanaSVG from '../../assets/svgs/SolanaSVG';
 import EthereumSVG from '../../assets/svgs/EthereumSVG';
 import ArrowSVG from '../../assets/svgs/ArrowSVG';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import {
+  accountIndexSelector,
+  accountsAtom,
+  chainsAtom,
+  chainSelector,
+  currentChainAccountsSelector,
+  seedAtom,
+  mnemonicAtom,
+} from '../../Atom';
+import { createWallet, getDerivedPath } from '../../utils';
 
 export default function CurrentChainAccounts() {
-  const [currentChainAccounts, mnemonic, chain, chains, genMemonic, createAddress, setChain] =
-    useOutletContext();
+  const mnemonic = useRecoilValue(mnemonicAtom);
+  const [chain, setChain] = useRecoilState(chainSelector);
+  const chains = useRecoilValue(chainsAtom);
+  const currentChainAccounts = useRecoilValue(currentChainAccountsSelector);
+  const seed = useRecoilValue(seedAtom);
+  const [accountIndex, setAccountIndex] = useRecoilState(accountIndexSelector);
+  const [accounts, setAccounts] = useRecoilState(accountsAtom);
+
+  function createAddress() {
+    if (!mnemonic) {
+      alert('Please add your mnemonic first!');
+      return;
+    }
+    const derivationPath = getDerivedPath(chains, chain, accountIndex[chain]);
+    const wallet = createWallet(mnemonic, derivationPath, seed, chain, chains);
+    setAccounts([...accounts, wallet]);
+    setAccountIndex((current) => {
+      return {
+        ...current,
+        [chain]: current[chain] + 1,
+      };
+    });
+  }
 
   if (!mnemonic) {
     alert('Please add set your mnemonic first!');

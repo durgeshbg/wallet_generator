@@ -2,19 +2,16 @@ import { Link, Navigate, useOutletContext, useParams } from 'react-router';
 import SolanaAccountInfo from './SolanaAccountInfo';
 import BitcoinAccountInfo from './BitcoinAccountInfo';
 import EthereumAccountInfo from './EthereumAccountInfo';
+import { useRecoilValue } from 'recoil';
+import { chainsAtom, chainSelector, currentChainAccountsSelector, mnemonicAtom } from '../../Atom';
 
 function Wallet() {
   const { id } = useParams();
-  const [
-    currentChainAccounts,
-    mnemonic,
-    chain,
-    chains,
-    genMemonic,
-    createAddress,
-    setChain,
-    addMnemonic,
-  ] = useOutletContext();
+  const currentChainAccounts = useRecoilValue(currentChainAccountsSelector);
+  const mnemonic = useRecoilValue(mnemonicAtom);
+  const chain = useRecoilValue(chainSelector);
+  const chains = useRecoilValue(chainsAtom);
+
   const currentAccount = currentChainAccounts.find(
     (account) => account.address === id && account.walletChain === chain
   );
