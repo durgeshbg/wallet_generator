@@ -1,14 +1,14 @@
 import DisplayMnemonic from './DisplayMnemonic';
 import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
-import { accountIndexSelector, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } from '../../Atom';
+import { accountIndexAtom, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } from '../../Atom';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function GenerateMnemonic() {
   const setMnemonic = useSetRecoilState(mnemonicAtom);
   const setSeed = useSetRecoilState(seedAtom);
   const setAccounts = useSetRecoilState(accountsAtom);
-  const setAccountIndex = useSetRecoilState(accountIndexSelector);
+  const setAccountIndex = useSetRecoilState(accountIndexAtom);
   const chains = useRecoilValue(chainsAtom);
 
   function genMemonic() {

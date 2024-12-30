@@ -4,7 +4,7 @@ import MnemonicForm from './MnemonicForm';
 import { mnemonicToSeedSync, validateMnemonic } from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { accountIndexSelector, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } from '../../Atom';
+import { accountIndexAtom, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } from '../../Atom';
 
 function AddMnemonic() {
   const [userMnemonic, setUserMnemonic] = useState();
@@ -14,7 +14,7 @@ function AddMnemonic() {
   const setMnemonic = useSetRecoilState(mnemonicAtom);
   const setSeed = useSetRecoilState(seedAtom);
   const setAccounts = useSetRecoilState(accountsAtom);
-  const setAccountIndex = useSetRecoilState(accountIndexSelector);
+  const setAccountIndex = useSetRecoilState(accountIndexAtom);
   const chains = useRecoilValue(chainsAtom);
 
   function addMnemonic(userMnemonic) {

@@ -19,23 +19,29 @@ export const chainsAtom = atom({
   },
 });
 
-export const chainSelector = selector({
+export const chainAtom = atom({
   key: 'chain',
-  get: ({ get }) => {
-    return get(chainsAtom)['solana'];
-  },
+  default: selector({
+    key: 'chainSelector',
+    get: ({ get }) => {
+      return get(chainsAtom)['solana'];
+    },
+  }),
 });
 
-export const accountIndexSelector = selector({
+export const accountIndexAtom = atom({
   key: 'accountIndex',
-  get: ({ get }) => {
-    const chains = get(chainsAtom);
-    return {
-      [chains['bitcoin']]: 0,
-      [chains['ethereum']]: 0,
-      [chains['solana']]: 0,
-    };
-  },
+  default: selector({
+    key: 'accountIndexSelector',
+    get: ({ get }) => {
+      const chains = get(chainsAtom);
+      return {
+        [chains['bitcoin']]: 0,
+        [chains['ethereum']]: 0,
+        [chains['solana']]: 0,
+      };
+    },
+  }),
 });
 
 export const accountsAtom = atom({
@@ -46,6 +52,6 @@ export const accountsAtom = atom({
 export const currentChainAccountsSelector = selector({
   key: 'currentChainAccounts',
   get: ({ get }) => {
-    return get(accountsAtom).filter((acc) => acc.walletChain === get(chainSelector));
+    return get(accountsAtom).filter((acc) => acc.walletChain === get(chainAtom));
   },
 });

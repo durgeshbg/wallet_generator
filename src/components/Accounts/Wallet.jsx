@@ -3,13 +3,13 @@ import SolanaAccountInfo from './SolanaAccountInfo';
 import BitcoinAccountInfo from './BitcoinAccountInfo';
 import EthereumAccountInfo from './EthereumAccountInfo';
 import { useRecoilValue } from 'recoil';
-import { chainsAtom, chainSelector, currentChainAccountsSelector, mnemonicAtom } from '../../Atom';
+import { chainsAtom, chainAtom, currentChainAccountsSelector, mnemonicAtom } from '../../Atom';
 
 function Wallet() {
   const { id } = useParams();
   const currentChainAccounts = useRecoilValue(currentChainAccountsSelector);
   const mnemonic = useRecoilValue(mnemonicAtom);
-  const chain = useRecoilValue(chainSelector);
+  const chain = useRecoilValue(chainAtom);
   const chains = useRecoilValue(chainsAtom);
 
   const currentAccount = currentChainAccounts.find(

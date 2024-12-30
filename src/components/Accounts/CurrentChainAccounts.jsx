@@ -7,10 +7,10 @@ import EthereumSVG from '../../assets/svgs/EthereumSVG';
 import ArrowSVG from '../../assets/svgs/ArrowSVG';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import {
-  accountIndexSelector,
+  accountIndexAtom,
   accountsAtom,
   chainsAtom,
-  chainSelector,
+  chainAtom,
   currentChainAccountsSelector,
   seedAtom,
   mnemonicAtom,
@@ -19,11 +19,11 @@ import { createWallet, getDerivedPath } from '../../utils';
 
 export default function CurrentChainAccounts() {
   const mnemonic = useRecoilValue(mnemonicAtom);
-  const [chain, setChain] = useRecoilState(chainSelector);
+  const [chain, setChain] = useRecoilState(chainAtom);
   const chains = useRecoilValue(chainsAtom);
   const currentChainAccounts = useRecoilValue(currentChainAccountsSelector);
   const seed = useRecoilValue(seedAtom);
-  const [accountIndex, setAccountIndex] = useRecoilState(accountIndexSelector);
+  const [accountIndex, setAccountIndex] = useRecoilState(accountIndexAtom);
   const [accounts, setAccounts] = useRecoilState(accountsAtom);
 
   function createAddress() {
