@@ -1,6 +1,9 @@
+import { useRecoilValue } from 'recoil';
 import ClipBoardSVG from '../../assets/svgs/ClipBoardSVG';
+import { mnemonicAtom } from '../../Atom';
 
-function DisplayMnemonic({ mnemonic }) {
+function DisplayMnemonic() {
+  const mnemonic = useRecoilValue(mnemonicAtom);
   let words = Array(12).join('.').split('.');
   if (mnemonic) {
     words = mnemonic.split(' ');

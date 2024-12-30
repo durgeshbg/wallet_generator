@@ -1,8 +1,31 @@
-import { useOutletContext } from 'react-router';
 import DisplayMnemonic from './DisplayMnemonic';
+import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/bip39';
+import { wordlist } from '@scure/bip39/wordlists/english';
+import { accountIndexSelector, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } from '../../Atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 function GenerateMnemonic() {
-  const [mnemonic, genMemonic, addMnemonic] = useOutletContext();
+  const setMnemonic = useSetRecoilState(mnemonicAtom);
+  const setSeed = useSetRecoilState(seedAtom);
+  const setAccounts = useSetRecoilState(accountsAtom);
+  const setAccountIndex = useSetRecoilState(accountIndexSelector);
+  const chains = useRecoilValue(chainsAtom);
+
+  function genMemonic() {
+    try {
+      const mnemonic = generateMnemonic(wordlist);
+      setMnemonic(mnemonic);
+      setSeed(mnemonicToSeedSync(mnemonic));
+      setAccounts([]);
+      setAccountIndex({
+        [chains['bitcoin']]: 0,
+        [chains['ethereum']]: 0,
+        [chains['solana']]: 0,
+      });
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  }
 
   return (
     <>
@@ -12,7 +35,7 @@ function GenerateMnemonic() {
       >
         Generate
       </button>
-      <DisplayMnemonic mnemonic={mnemonic} />
+      <DisplayMnemonic />
     </>
   );
 }

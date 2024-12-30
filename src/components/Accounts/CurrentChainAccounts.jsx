@@ -7,15 +7,8 @@ import EthereumSVG from '../../assets/svgs/EthereumSVG';
 import ArrowSVG from '../../assets/svgs/ArrowSVG';
 
 export default function CurrentChainAccounts() {
-  const [
-    currentChainAccounts,
-    mnemonic,
-    chain,
-    chains,
-    genMemonic,
-    createAddress,
-    setChain,
-  ] = useOutletContext();
+  const [currentChainAccounts, mnemonic, chain, chains, genMemonic, createAddress, setChain] =
+    useOutletContext();
 
   if (!mnemonic) {
     alert('Please add set your mnemonic first!');

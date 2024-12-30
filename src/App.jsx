@@ -1,7 +1,3 @@
-import { useState } from 'react';
-
-import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/bip39';
-import { wordlist } from '@scure/bip39/wordlists/english';
 import { createWallet, getDerivedPath } from './utils';
 import Header from './components/Header/Header';
 import { Outlet } from 'react-router';
@@ -14,47 +10,15 @@ import {
   mnemonicAtom,
   seedAtom,
 } from './Atom';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export default function App() {
-  const [mnemonic, setMnemonic] = useRecoilState(mnemonicAtom);
-  const [seed, setSeed] = useRecoilState(seedAtom);
+  const mnemonic = useRecoilValue(mnemonicAtom);
+  const seed = useRecoilValue(seedAtom);
   const chains = useRecoilValue(chainsAtom);
   const [chain, setChain] = useRecoilState(chainSelector);
   const [accountIndex, setAccountIndex] = useRecoilState(accountIndexSelector);
   const [accounts, setAccounts] = useRecoilState(accountsAtom);
-  const currentChainAccounts = useRecoilValue(currentChainAccountsSelector);
-
-  function genMemonic() {
-    try {
-      const mnemonic = generateMnemonic(wordlist);
-      setMnemonic(mnemonic);
-      setSeed(mnemonicToSeedSync(mnemonic));
-      setAccounts([]);
-      setAccountIndex({
-        [chains['bitcoin']]: 0,
-        [chains['ethereum']]: 0,
-        [chains['solana']]: 0,
-      });
-    } catch (error) {
-      console.error('Error:', error);
-    }
-  }
-
-  function addMnemonic(userMnemonic) {
-    const result = validateMnemonic(userMnemonic, wordlist);
-    if (result) {
-      setMnemonic(userMnemonic);
-      setSeed(mnemonicToSeedSync(mnemonic));
-      setAccounts([]);
-      setAccountIndex({
-        [chains['bitcoin']]: 0,
-        [chains['ethereum']]: 0,
-        [chains['solana']]: 0,
-      });
-    }
-    return result;
-  }
 
   function createAddress() {
     if (!mnemonic) {
@@ -77,18 +41,7 @@ export default function App() {
       <Header chains={chains} setChain={setChain} createAddress={createAddress} />
 
       <div className='flex flex-col bg-gradient-to-r'>
-        <Outlet
-          context={[
-            currentChainAccounts,
-            mnemonic,
-            chain,
-            chains,
-            genMemonic,
-            createAddress,
-            setChain,
-            addMnemonic,
-          ]}
-        />
+        <Outlet />
       </div>
     </>
   );

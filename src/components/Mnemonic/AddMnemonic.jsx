@@ -1,13 +1,36 @@
-import { useOutletContext } from 'react-router';
 import DisplayMnemonic from './DisplayMnemonic';
 import { useState } from 'react';
 import MnemonicForm from './MnemonicForm';
+import { mnemonicToSeedSync, validateMnemonic } from '@scure/bip39';
+import { wordlist } from '@scure/bip39/wordlists/english';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { accountIndexSelector, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } from '../../Atom';
 
 function AddMnemonic() {
-  const [mnemonic, genMemonic, addMnemonic] = useOutletContext();
   const [userMnemonic, setUserMnemonic] = useState();
   const [displayForm, setDisplayForm] = useState(true);
   const [error, setError] = useState();
+
+  const setMnemonic = useSetRecoilState(mnemonicAtom);
+  const setSeed = useSetRecoilState(seedAtom);
+  const setAccounts = useSetRecoilState(accountsAtom);
+  const setAccountIndex = useSetRecoilState(accountIndexSelector);
+  const chains = useRecoilValue(chainsAtom);
+
+  function addMnemonic(userMnemonic) {
+    const result = validateMnemonic(userMnemonic, wordlist);
+    if (result) {
+      setMnemonic(userMnemonic);
+      setSeed(mnemonicToSeedSync(userMnemonic));
+      setAccounts([]);
+      setAccountIndex({
+        [chains['bitcoin']]: 0,
+        [chains['ethereum']]: 0,
+        [chains['solana']]: 0,
+      });
+    }
+    return result;
+  }
 
   function validateUserMnemonic() {
     const res = addMnemonic(userMnemonic);
@@ -39,11 +62,7 @@ function AddMnemonic() {
         </button>
       </div>
 
-      {displayForm ? (
-        <MnemonicForm setUserMnemonic={setUserMnemonic} />
-      ) : (
-        <DisplayMnemonic mnemonic={mnemonic} />
-      )}
+      {displayForm ? <MnemonicForm setUserMnemonic={setUserMnemonic} /> : <DisplayMnemonic />}
       {error && (
         <div role='alert' className='alert alert-error mx-auto my-10 w-max'>
           <svg
