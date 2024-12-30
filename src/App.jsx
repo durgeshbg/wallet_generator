@@ -4,24 +4,26 @@ import { mnemonicToSeedSync, generateMnemonic, validateMnemonic } from '@scure/b
 import { wordlist } from '@scure/bip39/wordlists/english';
 import { createWallet, getDerivedPath } from './utils';
 import Header from './components/Header/Header';
-import { Navigate, Outlet, redirect } from 'react-router';
+import { Outlet } from 'react-router';
+import {
+  accountIndexSelector,
+  accountsAtom,
+  chainsAtom,
+  chainSelector,
+  currentChainAccountsSelector,
+  mnemonicAtom,
+  seedAtom,
+} from './Atom';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 export default function App() {
-  const [mnemonic, setMnemonic] = useState();
-  const [seed, setSeed] = useState();
-  const chains = {
-    bitcoin: 0,
-    ethereum: 60,
-    solana: 501,
-  };
-  const [chain, setChain] = useState(chains['solana']);
-  const [accountIndex, setAccountIndex] = useState({
-    [chains['bitcoin']]: 0,
-    [chains['ethereum']]: 0,
-    [chains['solana']]: 0,
-  });
-  const [accounts, setAccounts] = useState([]);
-  const currentChainAccounts = accounts.filter((acc) => acc.walletChain === chain);
+  const [mnemonic, setMnemonic] = useRecoilState(mnemonicAtom);
+  const [seed, setSeed] = useRecoilState(seedAtom);
+  const chains = useRecoilValue(chainsAtom);
+  const [chain, setChain] = useRecoilState(chainSelector);
+  const [accountIndex, setAccountIndex] = useRecoilState(accountIndexSelector);
+  const [accounts, setAccounts] = useRecoilState(accountsAtom);
+  const currentChainAccounts = useRecoilValue(currentChainAccountsSelector);
 
   function genMemonic() {
     try {

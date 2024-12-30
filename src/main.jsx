@@ -8,20 +8,23 @@ import CurrentChainAccounts from './components/Accounts/CurrentChainAccounts.jsx
 import AddMnemonic from './components/Mnemonic/AddMnemonic.jsx';
 import GenerateMnemonic from './components/Mnemonic/GenerateMnemonic.jsx';
 import Wallet from './components/Accounts/Wallet.jsx';
+import { RecoilRoot } from 'recoil';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<App />}>
-          <Route path='/' element={<Mnemonic />}>
-            <Route index element={<GenerateMnemonic />} />
-            <Route path='add' element={<AddMnemonic />} />
+    <RecoilRoot>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<App />}>
+            <Route path='/' element={<Mnemonic />}>
+              <Route index element={<GenerateMnemonic />} />
+              <Route path='add' element={<AddMnemonic />} />
+            </Route>
+            <Route path='accounts' element={<CurrentChainAccounts />} />
+            <Route path='accounts/:id' element={<Wallet />} />
           </Route>
-          <Route path='accounts' element={<CurrentChainAccounts />} />
-          <Route path='accounts/:id' element={<Wallet />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </RecoilRoot>
   </StrictMode>
 );
