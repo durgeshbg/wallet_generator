@@ -38,8 +38,7 @@ export default function App() {
 
   return (
     <>
-      <Header chains={chains} setChain={setChain} createAddress={createAddress} />
-
+      <Header />
       <div className='flex flex-col bg-gradient-to-r'>
         <Outlet />
       </div>

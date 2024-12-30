@@ -1,6 +1,6 @@
 import { Link } from 'react-router';
 
-function Header({ chains, setChain, createAddress }) {
+function Header() {
   return (
     <header className='flex px-3 py-2 justify-between'>
       <div className='navbar bg-base-200 rounded-md shadow-md flex-wrap'>
