@@ -8,7 +8,7 @@ import { accountIndexAtom, accountsAtom, chainsAtom, mnemonicAtom, seedAtom } fr
 
 function AddMnemonic() {
   const [userMnemonic, setUserMnemonic] = useState();
-  const [displayForm, setDisplayForm] = useState(true);
+  const [displayForm, setDisplayForm] = useState(false);
   const [error, setError] = useState();
 
   const setMnemonic = useSetRecoilState(mnemonicAtom);
@@ -46,25 +46,42 @@ function AddMnemonic() {
   return (
     <>
       <div className='my-4 mx-auto'>
-        <button
-          className='btn btn-outline btn-info btn-md mx-5 w-max uppercase'
-          onClick={() => {
-            setDisplayForm(true);
-          }}
-        >
-          Add
-        </button>
-        <button
-          className='btn btn-outline btn-info btn-md mx-5 w-max uppercase'
-          onClick={validateUserMnemonic}
-        >
-          Validate
-        </button>
+        {!displayForm ? (
+          <button
+            className='btn btn-outline btn-info btn-md mx-5 w-max uppercase'
+            onClick={() => {
+              setDisplayForm(true);
+            }}
+          >
+            Add
+          </button>
+        ) : (
+          <>
+            <button
+              className='btn btn-outline btn-error btn-md mx-5 w-max uppercase'
+              onClick={() => {
+                setDisplayForm(false);
+              }}
+            >
+              Cancel
+            </button>
+            <button
+              className='btn btn-outline btn-info btn-md mx-5 w-max uppercase'
+              onClick={validateUserMnemonic}
+            >
+              Validate
+            </button>
+          </>
+        )}
       </div>
 
       {displayForm ? <MnemonicForm setUserMnemonic={setUserMnemonic} /> : <DisplayMnemonic />}
       {error && (
-        <div role='alert' className='alert alert-error mx-auto my-10 w-max'>
+        <div
+          role='alert'
+          onClick={() => setError(false)}
+          className='alert alert-error mx-auto my-10 w-max animate-bounce'
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6 shrink-0 stroke-current'
